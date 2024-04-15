@@ -21,14 +21,19 @@ namespace API.Controllers
 		[HttpGet("{id}")]
 		public IActionResult GetPrekiuKrepseliai(Guid id)
 		{
-			return Ok(_itemsService.GetPrekiuKrepseliai(id));
+			return Ok(_itemsService.GetKopijosByVartotojoId(id));
 		}
 
 		[HttpPost]
-		public IActionResult PostKrepselis(Krepselis item)
+		public IActionResult PostKrepselis(Guid preke_id, Guid vartotojo_id)
 		{
+			Kopija item = new Kopija();
 			item.Id = Guid.NewGuid();
-			_itemsService.AddKrepselis(item);
+            Console.WriteLine(item.Id);
+            Console.WriteLine(preke_id);
+            Console.WriteLine(vartotojo_id);
+            item.Preke_Id = preke_id;
+			_itemsService.AddKrepselis(item, vartotojo_id);
 
 			return Ok(item);
 		}
@@ -36,47 +41,7 @@ namespace API.Controllers
 		[HttpDelete("{id}")]
 		public IActionResult DeleteKrepselis(Guid id)
 		{
-			_itemsService.DeleteKrepselis(id);
-			return Ok();
-		}
-		[HttpDelete("deleteAll/{id}")]
-		public IActionResult DeleteAllKrepselis(Guid id)
-		{
-			_itemsService.DeleteAllKrepselis(id);
-			return Ok();
-		}
-		[HttpPost("insertmokejimas")]
-		public IActionResult InsertMokejimas(List<PrekiuKrepselis> items)
-		{
-			var mokejimas = _itemsService.InsertMokejimas(items);
-
-			if (mokejimas != null)
-			{
-				return Ok(mokejimas);
-			}
-			else
-			{
-				return BadRequest("Nepavyko sukurti mokejimo. Patikrinkite prekių ID arba kitus duomenis.");
-			}
-		}
-		[HttpGet("mokejimas/{id}")]
-		public IActionResult GetMokejimai(Guid id)
-		{
-			var mokejimai = _itemsService.GetMokejimai(id);
-
-			if (mokejimai.Count == 0)
-			{
-				return NotFound();
-			}
-
-			return Ok(mokejimai);
-		}
-
-
-		[HttpPatch("{id}")]
-		public IActionResult UpdateItem(Guid id, Krepselis item)
-		{
-			_itemsService.UpdateKrepselis(id, item);
+			_itemsService.RemovePrekeFromKrepselis(id);
 			return Ok();
 		}
 	}

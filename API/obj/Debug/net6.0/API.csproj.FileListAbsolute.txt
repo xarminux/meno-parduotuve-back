@@ -64,3 +64,4 @@ C:\Users\manop\Desktop\meno-parduotuve\backend\API\obj\Debug\net6.0\refint\API.d
 C:\Users\manop\Desktop\meno-parduotuve\backend\API\obj\Debug\net6.0\API.pdb
 C:\Users\manop\Desktop\meno-parduotuve\backend\API\obj\Debug\net6.0\API.genruntimeconfig.cache
 C:\Users\manop\Desktop\meno-parduotuve\backend\API\obj\Debug\net6.0\ref\API.dll
+C:\Users\manop\Desktop\meno-parduotuve\backend\API\obj\Debug\net6.0\API.sourcelink.json
